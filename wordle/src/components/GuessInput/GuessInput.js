@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import Banner from '../Banner';
 
-const GuessInput = ({ addNewGuess }) => {
+const GuessInput = ({ addNewGuess, gameStatus, guessCount }) => {
 	const [guessInput, setGuessInput] = useState('');
 
 	const handleChange = (e) => {
@@ -9,16 +10,21 @@ const GuessInput = ({ addNewGuess }) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log({ guessInput });
 		addNewGuess(guessInput);
 		setGuessInput('');
 	}
 
 	return (
 		<form className='guess-input-wrapper' onSubmit={handleSubmit}>
-			<label htmlFor="guess-input">Enter guess:</label>
-			<input required id="guess-input" value={guessInput} onChange={handleChange} minLength={5}
-				maxLength={5} title="5 letter word" pattern='[A-Za-z]{5}' />
+			{gameStatus
+				? <Banner gameStatus={gameStatus} guessCount={guessCount} />
+				: (
+					<>
+						<label htmlFor="guess-input">Enter guess:</label>
+						<input required id="guess-input" value={guessInput} onChange={handleChange} minLength={5}
+							maxLength={5} title="5 letter word" pattern='[A-Za-z]{5}' />
+					</>
+				)}
 		</form>
 	);
 }
