@@ -1,19 +1,17 @@
 import { useState } from 'react';
 
+import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
+import { checkGuess } from '../../game-helpers';
 import { sample } from '../../utils';
 import { WORDS } from '../../data';
-import { checkGuess } from '../../game-helpers';
 
+import Keyboard from '../Keyboard';
 import GuessInput from '../GuessInput';
 import GuessResults from '../GuessResults';
-import WinningBanner from '../WinningBanner';
 import LosingBanner from '../LosingBanner';
-import Keyboard from '../Keyboard';
-import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
+import WinningBanner from '../WinningBanner';
 
-// Pick a random word on every pageload.
 const answer = sample(WORDS);
-// To make debugging easier, we'll log the solution in the console.
 console.info({ answer });
 
 function Game() {
@@ -25,7 +23,7 @@ function Game() {
 		setGuesses(nextGuesses);
 		if (guess === answer) {
 			setGameStatus('pos');
-		} else if (guess && nextGuesses.length >= NUM_OF_GUESSES_ALLOWED) {
+		} else if (nextGuesses.length >= NUM_OF_GUESSES_ALLOWED) {
 			setGameStatus('neg');
 		}
 	};
@@ -38,7 +36,7 @@ function Game() {
 				<WinningBanner guessCount={guesses.length} />
 			)}
 			{gameStatus === 'neg' && <LosingBanner answer={answer} />}
-			<Keyboard guesses={guesses} />
+			{gameStatus === undefined && <Keyboard guesses={guesses} />}
 		</>
 	);
 }
