@@ -6,6 +6,9 @@ import { checkGuess } from '../../game-helpers';
 
 import GuessInput from '../GuessInput';
 import Guesses from '../GuessResults';
+import WinningBanner from '../WinningBanner';
+import LosingBanner from '../LosingBanner';
+
 import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
 
 // Pick a random word on every pageload.
@@ -17,25 +20,24 @@ function Game() {
 	const [guesses, setGuesses] = useState([]);
 	const [gameStatus, setGameStatus] = useState(undefined);
 
-	const updateGameStatus = (guess) => {
-		if (guess && !guess.find(elem => elem.status === 'incorrect') && !guess.find(elem => elem.status === 'misplaced')) {
+	const addNewGuess = (guess) => {
+		const nextGuesses = [...guesses, checkGuess(guess, answer)];
+		setGuesses(nextGuesses);
+		if (guess === answer) {
 			setGameStatus('pos');
-		}
-		else if (guess && guesses.length >= NUM_OF_GUESSES_ALLOWED - 1) {
+		} else if (guess && nextGuesses.length >= NUM_OF_GUESSES_ALLOWED) {
 			setGameStatus('neg');
 		}
-	}
-
-	const addNewGuess = (guess) => {
-		const checkedGuess = checkGuess(guess, answer)
-		setGuesses([...guesses, checkedGuess]);
-		updateGameStatus(checkedGuess);
-	}
+	};
 
 	return (
 		<>
 			<Guesses guesses={guesses} />
-			<GuessInput addNewGuess={addNewGuess} gameStatus={gameStatus} guessCount={guesses.length}/>
+			<GuessInput addNewGuess={addNewGuess} gameStatus={gameStatus} />
+			{gameStatus === 'pos' && (
+				<WinningBanner guessCount={guesses.length} />
+			)}
+			{gameStatus === 'neg' && <LosingBanner answer={answer} />}
 		</>
 	);
 }
