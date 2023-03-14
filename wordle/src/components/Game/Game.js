@@ -5,10 +5,10 @@ import { WORDS } from '../../data';
 import { checkGuess } from '../../game-helpers';
 
 import GuessInput from '../GuessInput';
-import Guesses from '../GuessResults';
+import GuessResults from '../GuessResults';
 import WinningBanner from '../WinningBanner';
 import LosingBanner from '../LosingBanner';
-
+import Keyboard from '../Keyboard';
 import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
 
 // Pick a random word on every pageload.
@@ -32,12 +32,13 @@ function Game() {
 
 	return (
 		<>
-			<Guesses guesses={guesses} />
+			<GuessResults guesses={guesses} />
 			<GuessInput addNewGuess={addNewGuess} gameStatus={gameStatus} />
 			{gameStatus === 'pos' && (
 				<WinningBanner guessCount={guesses.length} />
 			)}
 			{gameStatus === 'neg' && <LosingBanner answer={answer} />}
+			<Keyboard guesses={guesses} />
 		</>
 	);
 }

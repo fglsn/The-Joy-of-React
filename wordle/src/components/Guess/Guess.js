@@ -19,6 +19,6 @@ const Guess = ({ guess }) => {
 			))}
 		</p>
 	);
-}
+};
 
 export default Guess;
