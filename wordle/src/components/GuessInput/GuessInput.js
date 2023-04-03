@@ -18,6 +18,7 @@ const GuessInput = ({ addNewGuess, gameStatus }) => {
 			<label htmlFor="guess-input">Enter guess:</label>
 			<input
 				required
+				autoFocus
 				disabled={gameStatus}
 				id="guess-input"
 				value={guessInput}
