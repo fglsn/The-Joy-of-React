@@ -1,0 +1,11 @@
+.wrapper {
+  position: relative;
+  pointer-events: none;
+}
+.character {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: 200px;
+  transition: transform 200ms;
+}
