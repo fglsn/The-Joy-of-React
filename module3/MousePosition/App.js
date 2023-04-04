@@ -7,9 +7,20 @@ function MouseCoords() {
   });
 
   React.useEffect(() => {
-    window.addEventListener("mousemove", (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    });
+    //logic
+    function handleMouseMove(event) {
+      setMousePosition({
+        x: event.clientX,
+        y: event.clientY,
+      });
+    }
+
+    window.addEventListener("mousemove", handleMouseMove);
+
+    //cleanup
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
   }, []);
 
   return (
