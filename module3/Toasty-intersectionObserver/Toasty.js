@@ -5,21 +5,21 @@ import styles from "./Toasty.module.css";
 // https://courses.joshwcomeau.com/joy-of-react/03-hooks/05.05-on-mount-exercises
 
 // Here's how we'd solve this problem using vanilla JS:
-function pureJsVersion() {
-  const wrapperElement = document.querySelector(".toasty-wrapper");
+// function pureJsVersion() {
+//   const wrapperElement = document.querySelector(".toasty-wrapper");
 
-  const observer = new IntersectionObserver((entries) => {
-    const [entry] = entries;
+//   const observer = new IntersectionObserver((entries) => {
+//     const [entry] = entries;
 
-    if (entry.isIntersecting) {
-      // Show character
-    } else {
-      // Hide character
-    }
-  });
+//     if (entry.isIntersecting) {
+//       // Show character
+//     } else {
+//       // Hide character
+//     }
+//   });
 
-  observer.observe(wrapperElement);
-}
+//   observer.observe(wrapperElement);
+// }
 
 function Toasty() {
   // The goal is to update the `isShown` state variable,
