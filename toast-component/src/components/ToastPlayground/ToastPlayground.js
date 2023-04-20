@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Toast from '../Toast'
 import Button from '../Button'
 
 import styles from './ToastPlayground.module.css'
@@ -9,6 +9,11 @@ const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error']
 function ToastPlayground() {
     const [message, setMessage] = React.useState('')
     const [selectedVariant, setSelectedVariant] = React.useState('notice')
+    const [isShown, setIsShown] = React.useState(false)
+
+    const handleSubmit = () => {
+        message !== '' && setIsShown(true)
+    }
 
     return (
         <div className={styles.wrapper}>
@@ -16,7 +21,13 @@ function ToastPlayground() {
                 <img alt="Cute toast mascot" src="/toast.png" />
                 <h1>Toast Playground</h1>
             </header>
-
+            {isShown === true && message !== '' && (
+                <Toast
+                    variant={selectedVariant}
+                    message={message}
+                    setIsShown={setIsShown}
+                />
+            )}
             <div className={styles.controlsWrapper}>
                 <div className={styles.row}>
                     <label
@@ -52,7 +63,9 @@ function ToastPlayground() {
                                                 selectedVariant === variant
                                             }
                                             onChange={(e) =>
-                                                setSelectedVariant(e.target.value)
+                                                setSelectedVariant(
+                                                    e.target.value
+                                                )
                                             }
                                             name={variant}
                                             value={variant}
@@ -70,7 +83,7 @@ function ToastPlayground() {
                     <div
                         className={`${styles.inputWrapper} ${styles.radioWrapper}`}
                     >
-                        <Button>Pop Toast!</Button>
+                        <Button onClick={handleSubmit}>Pop Toast!</Button>
                     </div>
                 </div>
             </div>

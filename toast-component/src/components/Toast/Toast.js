@@ -1,38 +1,41 @@
-import React from 'react';
+import React from 'react'
 import {
-  AlertOctagon,
-  AlertTriangle,
-  CheckCircle,
-  Info,
-  X,
-} from 'react-feather';
+    AlertOctagon,
+    AlertTriangle,
+    CheckCircle,
+    Info,
+    X,
+} from 'react-feather'
 
-import VisuallyHidden from '../VisuallyHidden';
+import VisuallyHidden from '../VisuallyHidden'
 
-import styles from './Toast.module.css';
+import styles from './Toast.module.css'
 
 const ICONS_BY_VARIANT = {
-  notice: Info,
-  warning: AlertTriangle,
-  success: CheckCircle,
-  error: AlertOctagon,
-};
-
-function Toast() {
-  return (
-    <div className={`${styles.toast} ${styles.notice}`}>
-      <div className={styles.iconContainer}>
-        <Info size={24} />
-      </div>
-      <p className={styles.content}>
-        16 photos have been uploaded
-      </p>
-      <button className={styles.closeButton}>
-        <X size={24} />
-        <VisuallyHidden>Dismiss message</VisuallyHidden>
-      </button>
-    </div>
-  );
+    notice: Info,
+    warning: AlertTriangle,
+    success: CheckCircle,
+    error: AlertOctagon,
 }
 
-export default Toast;
+function Toast({ variant, message, setIsShown }) {
+    const Variant = ICONS_BY_VARIANT[variant]
+
+    return (
+        <div className={`${styles.toast} ${styles[variant]}`}>
+            <div className={styles.iconContainer}>
+                <Variant size={24} />
+            </div>
+            <p className={styles.content}>{message}</p>
+            <button
+                className={styles.closeButton}
+                onClick={() => setIsShown(false)}
+            >
+                <X size={24} />
+                <VisuallyHidden>Dismiss message</VisuallyHidden>
+            </button>
+        </div>
+    )
+}
+
+export default Toast
