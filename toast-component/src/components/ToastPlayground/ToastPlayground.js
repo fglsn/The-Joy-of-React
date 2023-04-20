@@ -43,23 +43,25 @@ function ToastPlayground() {
                     >
                         {VARIANT_OPTIONS.map((variant) => {
                             return (
-                                <label htmlFor={`variant-${variant}`}>
-                                    <input
-                                        id={`variant-${variant}`}
-                                        type="radio"
-                                        checked={selectedVariant === variant}
-                                        onClick={(e) =>
-                                            setSelectedVariant(e.target.v)
-                                        }
-                                        name={variant}
-                                        value={variant}
-                                    />
-                                    {variant}
-                                </label>
+                                <div key={variant}>
+                                    <label htmlFor={`variant-${variant}`}>
+                                        <input
+                                            id={`variant-${variant}`}
+                                            type="radio"
+                                            checked={
+                                                selectedVariant === variant
+                                            }
+                                            onChange={(e) =>
+                                                setSelectedVariant(e.target.value)
+                                            }
+                                            name={variant}
+                                            value={variant}
+                                        />
+                                        {variant}
+                                    </label>
+                                </div>
                             )
                         })}
-
-                        {/* TODO Other Variant radio buttons here */}
                     </div>
                 </div>
 
