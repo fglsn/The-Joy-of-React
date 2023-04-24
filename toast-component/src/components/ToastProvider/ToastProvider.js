@@ -27,7 +27,7 @@ function ToastProvider({ children }) {
 
     return (
         <ToastContext.Provider
-            value={{ toasts, setToasts, addToast, handleDismiss }}
+            value={{ toasts, addToast, handleDismiss }}
         >
             {children}
         </ToastContext.Provider>
