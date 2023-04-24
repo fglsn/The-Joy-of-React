@@ -1,21 +1,11 @@
 import React from 'react'
-
+import useEscapeKey from '../../hooks/useEscapeBtn'
 export const ToastContext = React.createContext({})
 
 function ToastProvider({ children }) {
     const [toasts, setToasts] = React.useState([])
 
-    React.useEffect(() => {
-        const handleClose = (e) => {
-            if (e.code === 'Escape') {
-                setToasts([])
-            }
-        }
-
-        window.addEventListener('keydown', handleClose)
-
-        return () => window.removeEventListener('keydown', handleClose)
-    }, [])
+    useEscapeKey(() => setToasts([]))
 
     const addToast = (selectedVariant, message) => {
         const newToasts = [
