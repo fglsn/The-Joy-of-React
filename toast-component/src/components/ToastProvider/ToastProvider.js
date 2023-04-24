@@ -5,7 +5,12 @@ export const ToastContext = React.createContext({})
 function ToastProvider({ children }) {
     const [toasts, setToasts] = React.useState([])
 
-    useEscapeKey(() => setToasts([]))
+    //use useCallback to not regenerate callback on every render
+    const handleEscape = React.useCallback(() => {
+        setToasts([])
+    }, [])
+    //custom hook to close all notifications
+    useEscapeKey(handleEscape)
 
     const addToast = (selectedVariant, message) => {
         const newToasts = [
@@ -26,9 +31,7 @@ function ToastProvider({ children }) {
     }
 
     return (
-        <ToastContext.Provider
-            value={{ toasts, addToast, handleDismiss }}
-        >
+        <ToastContext.Provider value={{ toasts, addToast, handleDismiss }}>
             {children}
         </ToastContext.Provider>
     )
