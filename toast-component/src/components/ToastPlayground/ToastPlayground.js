@@ -8,8 +8,10 @@ const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error']
 
 function ToastPlayground() {
     const { toasts, addToast } = React.useContext(ToastContext)
-    const [selectedVariant, setSelectedVariant] = React.useState('notice')
     const [message, setMessage] = React.useState('')
+    const [selectedVariant, setSelectedVariant] = React.useState(
+        VARIANT_OPTIONS[0]
+    )
 
     const handleSubmit = (e) => {
         e.preventDefault()
