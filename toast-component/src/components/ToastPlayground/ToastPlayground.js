@@ -56,11 +56,12 @@ function ToastPlayground() {
                             className={`${styles.inputWrapper} ${styles.radioWrapper}`}
                         >
                             {VARIANT_OPTIONS.map((variant) => {
+                                const id = `variant-${variant}`
                                 return (
-                                    <div key={variant}>
-                                        <label htmlFor={`variant-${variant}`}>
+                                    <div key={id}>
+                                        <label htmlFor={id}>
                                             <input
-                                                id={`variant-${variant}`}
+                                                id={id}
                                                 type="radio"
                                                 checked={
                                                     selectedVariant === variant
