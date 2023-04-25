@@ -70,7 +70,7 @@ function ToastPlayground() {
                                                         e.target.value
                                                     )
                                                 }
-                                                name={variant}
+                                                name="variant"
                                                 value={variant}
                                             />
                                             {variant}
