@@ -19,7 +19,7 @@ function ToastPlayground() {
 
         addToast(selectedVariant, message)
 
-        setSelectedVariant('notice')
+        setSelectedVariant(VARIANT_OPTIONS[0])
         setMessage('')
     }
 
